@@ -4,7 +4,10 @@ import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
-@Table(name = "users")
+@Table(name = "users", uniqueConstraints = {
+        @UniqueConstraint(columnNames = "username"),
+        @UniqueConstraint(columnNames = "email")
+})
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -28,5 +31,8 @@ public class User {
 
     @Column(unique = true)
     private String email;
+
+    @Column(nullable = false)
+    private boolean enabled = true;
 }
 
